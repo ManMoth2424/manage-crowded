@@ -4,7 +4,7 @@ const { Pool } = require('pg');
 // ★【重要】Renderなどのデプロイ先では DATABASE_URL という環境変数を使う
 // ローカルでテストする場合も、この名前で環境変数を設定する
 // (もし設定が面倒なら、一時的に connectionString: 'コピーしたNeonのURL' でも可)
-const connectionString = process.env.DATABASE_URL; 
+const connectionString = 'postgresql://neondb_owner:npg_e6Ebv0mNMrft@ep-autumn-pond-a1y37ysq-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'; 
 
 if (!connectionString) {
   throw new Error("DATABASE_URL 環境変数が設定されていません。");

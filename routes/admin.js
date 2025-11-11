@@ -87,7 +87,7 @@ router.get('/update', requireLogin, async (req, res, next) => {
     // ★ db.all(...) を await db.query(...) に変更
     const { rows } = await db.query('SELECT * FROM locations');
     
-    res.render('update', { 
+    res.render('admin/update', { 
       title: '混雑状況 更新', 
       data: rows 
     });
