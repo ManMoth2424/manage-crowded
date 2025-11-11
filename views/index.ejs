@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  
+  <link rel="stylesheet" href="/stylesheets/index.css">
+
+  </head>
+<body>
+
+  <div class="slider-container">
+    <div class="slider-track">
+      <div class="slide slide-1">
+        <div class="inSlide">
+          <h2>1年A組 お化け屋敷 👻</h2>
+          <p>体育館裏で絶賛開催中！</p>
+        </div>
+      </div>
+      <div class="slide slide-2">
+        <div class="inSlide">
+          <h2>中庭 模擬店 🍽️</h2>
+          <p>やきそば・わたあめ・タピオカ！</p>
+        </div>
+      </div>
+      <div class="slide slide-3">
+        <div class="inSlide">
+          <h2>体育館 ステージ発表 🎸</h2>
+          <p>13:00からバンド演奏スタート！</p>
+        </div>
+      </div>
+      <div class="slide slide-1">
+        <div class="inSlide">
+          <h2>1年A組 お化け屋敷 👻</h2>
+          <p>体育館裏で絶賛開催中！</p>
+        </div>
+      </div>
+      <div class="slide slide-2">
+        <div class="inSlide">
+          <h2>中庭 模擬店 🍽️</h2>
+          <p>やきそば・わたあめ・タピオカ！</p>
+        </div>
+      </div>
+      <div class="slide slide-3">
+        <div class="inSlide">
+          <h2>体育館 ステージ発表 🎸</h2>
+          <p>13:00からバンド演奏スタート！</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h1>🏮 <%= title %></h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>クラス</th>
+        <th>展示名</th>
+        <th>混雑状況</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (locals.data && data.length > 0) { %>
+
+        <% data.forEach(item => { %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= item.class_name %></td>
+            <td><%= item.exhibit_name %></td>
+            
+            <%
+              // 混雑状況に応じてCSSクラスを付与
+              // ( "Unexpected token 'else'" エラーを避けるため、1つのにまとめる)
+              let statusClass = '';
+              if (item.status.includes('混雑')) {
+                statusClass = 'status-crowded';
+              } else if (item.status.includes('普通')) {
+                statusClass = 'status-normal';
+              } else if (item.status.includes('空き')) {
+                statusClass = 'status-empty';
+              }
+            %>
+            
+            <td class="<%= statusClass %>"><%= item.status %></td>
+          </tr>
+        <% }) %>
+      
+      <% } else { %>
+        <tr>
+          <td colspan="4" style="text-align: center;">現在、表示できる情報がありません。</td>
+        </tr>
+      <% } %>
+
+    </tbody>
+  </table>
+  <script src="/javascripts/main.js"></script>
+  </body>
+</html>

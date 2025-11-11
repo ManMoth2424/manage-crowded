@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title><%= title %></title>
+  
+  <style>
+    body { 
+      font-family: sans-serif; 
+      display: grid; 
+      place-items: center; 
+      min-height: 80vh; 
+      background-color: #f4f4f4;
+    }
+    .login-box { 
+      border: 1px solid #ccc; 
+      padding: 30px; 
+      border-radius: 8px; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+      background-color: white;
+    }
+    .login-box h1 { 
+      margin-top: 0;
+      text-align: center;
+      color: #333;
+    }
+    .login-box form div { 
+      margin-bottom: 15px; 
+    }
+    .login-box label { 
+      display: block; 
+      margin-bottom: 5px; 
+      font-weight: bold;
+    }
+    .login-box input[type="password"] { 
+      width: 250px; 
+      padding: 10px; 
+      border-radius: 4px; 
+      border: 1px solid #ddd; 
+    }
+    .login-box button { 
+      width: 100%; 
+      padding: 10px; 
+      background-color: #007bff; 
+      color: white; 
+      border: none; 
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 16px;
+    }
+    .login-box .error { 
+      color: red; 
+      margin-top: 15px;
+      text-align: center; 
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h1><%= title %></h1>
+    <p>管理用の共通パスワードを入力してください。</p>
+
+    <form action="/admin/login" method="POST">
+      <div>
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">ログイン</button>
+    </form>
+    
+    <% if (locals.error && error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+/* === 全体の基本設定 === */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+h1 {
+  color: white;
+  background-color: #b80303;
+  border-bottom: 3px solid #d9534f;
+  padding-bottom: 10px;
+  margin: 0 10px 20px 10px;
+  /* 🏮 絵文字がガタつくのを防ぐ */
+  font-feature-settings: "palt";
+}
+
+/* === テーブルのスタイル === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden; /* 角丸を効かせるため */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* テーブルヘッダー (ID, クラス...) */
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* テーブルの行 (交互に色を変える) */
+tbody tr:nth-child(even) {
+  background-color: #fcfcfc;
+}
+
+/* === 混雑状況ごとの色分け === */
+.status-crowded {
+  /* 混雑 😥 */
+  font-weight: bold;
+  color: #d9534f; /* 赤系 */
+}
+.status-normal {
+  /* 普通 🙂 */
+  color: #f0ad4e; /* オレンジ系 */
+}
+.status-empty {
+  /* 空き 🤩 */
+  font-weight: bold;
+  color: #5cb85c; /* 緑系 */
+}
+
+.slider-container {
+  width: 100%;
+  height: 500px; /* ★指定された高さ */
+  margin-bottom: 20px;
+  overflow: hidden; /* ★重要: はみ出た部分を隠す */
+  position: relative;
+  background-color: #eee;
+}
+
+/* スライド全体を運ぶ「ベルトコンベア」 */
+.slider-track {
+  display: flex;
+  height: 100%;
+  
+  /* ↓↓↓★削除★↓↓↓ */
+  /* width: 600%;  */
+  /* animation: scroll 20s ease-in-out infinite; */
+  /* ↑↑↑★削除★↑↑↑ */
+}
+
+/* 各スライドパネル */
+.slide {
+  /* ★重要: トラック幅(600%) / 6枚 = 16.666...% */
+  /* width: 16.666667%; */
+  height: 100%;
+  
+  /* 以下は装飾 (文字を中央に) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.5);
+  font-size: 1.5em;
+  padding: 20px;
+  box-sizing: border-box; /* paddingを含めて幅を計算 */
+}
+
+/* スライドごとの背景（仮） */
+/* ... (他のスタイル) ... */
+
+/* スライドごとの背景 */
+.slide-1 {
+  /*
+   * url('/images/slide1.jpg')
+   * ↓
+   * public/images/slide1.jpg を読み込む
+   */
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/images/picture01.jpg') center/cover;
+}
+.slide-2 {
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/images/picture02.jpg') center/cover;
+}
+.slide-3 {
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/images/picture03.jpg') center/cover;
+}
+
+/* ... (他のスタイル) ... */
+
+
+/* ★スライドを動かすアニメーションの定義 */
+/* @keyframes scroll { */
+  /* --- 1枚目 --- */
+  /* 0% { */
+    /* transform: translateX(0%); 開始位置 */
+  /* } */
+  /* (例) アニメーション全体の25%の地点まで 1枚目 で停止 */
+  /* 25% { */
+    /* transform: translateX(0%); */
+  /* } */
+/*  */
+  /* --- 2枚目 --- */
+  /* (例) 33.33%の地点（1枚スライドした位置）へ移動 */
+  /* 33.33% { */
+    /* transform: translateX(-16.666667%);  */
+  /* } */
+  /* (例) 58.33%の地点まで 2枚目 で停止 */
+  /* 58.33% { */
+    /* transform: translateX(-16.666667%); */
+  /* } */
+/*  */
+  /* --- 3枚目 --- */
+  /* (例) 66.66%の地点（2枚スライドした位置）へ移動 */
+  /* 66.66% { */
+    /* transform: translateX(-33.333333%); */
+  /* } */
+  /* (例) 91.66%の地点まで 3枚目 で停止 */
+  /* 91.66% { */
+    /* transform: translateX(-33.333333%); */
+  /* } */
+
+  /* --- ループ位置 (1枚目コピー) --- */
+  /* (例) 100%の地点（3枚スライドした位置）へ移動 */
+  /* 100% { */
+    /* transform: translateX(-50%); */
+  /* } */
+/* } */
+
+/* (任意) マウスが乗ったらアニメーションを止める */
+.slider-container:hover .slider-track {
+  animation-play-state: paused;
+}

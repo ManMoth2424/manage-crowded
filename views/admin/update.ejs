@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>混雑状況 更新</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <style>
+    body {
+      padding-bottom: 50px;
+    }
+    .update-form-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 25px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fcfcfc;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .update-form-container h2 {
+      margin-top: 0;
+      text-align: center;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+      color: #007bff;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .form-group select, .form-group button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-size: 1em;
+      box-sizing: border-box; /* paddingを含めて幅100%にする */
+    }
+    .form-group button {
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+    .form-group button:hover {
+      background-color: #0056b3;
+    }
+    .logout-link {
+      display: block;
+      text-align: right;
+      margin: -10px 10px 10px 0;
+    }
+    hr {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🏮 混雑状況 更新 (管理者)</h1>
+  <a href="/admin/logout" class="logout-link">[ ログアウト ]</a>
+
+  <div class="update-form-container">
+    <h2>ステータス更新</h2>
+
+    <form action="/admin/update-status" method="POST">
+      
+      <div class="form-group">
+        <label for="locationId">場所:</label>
+        <select id="locationId" name="locationId" required>
+          <option value="">-- 更新する場所を選択 --</option>
+          
+          <% data.forEach(item => { %>
+            <option value="<%= item.id %>">
+              <%= item.class_name %> - <%= item.exhibit_name %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="newStatus">新しい状況:</label>
+        <select id="newStatus" name="newStatus" required>
+          <option value="">-- 新しい状況を選択 --</option>
+          <option value="空き 🤩">空き 🤩</option>
+          <option value="普通 🙂">普通 🙂</option>
+          <option value="混雑 😥">混雑 😥</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">更新する</button>
+      </div>
+
+    </form>
+  </div>
+
+  <hr>
+
+  <h2>現在の状況一覧</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>クラス</th>
+        <th>展示名</th>
+        <th>混雑状況</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(item => { %>
+        <tr>
+          <td><%= item.id %></td>
+          <td><%= item.class_name %></td>
+          <td><%= item.exhibit_name %></td>
+          
+          <%
+            let statusClass = '';
+            if (item.status.includes('混雑')) {
+              statusClass = 'status-crowded';
+            } else if (item.status.includes('普通')) {
+              statusClass = 'status-normal';
+            } else if (item.status.includes('空き')) {
+              statusClass = 'status-empty';
+            }
+          %>
+          <td class="<%= statusClass %>"><%= item.status %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+</body>
+</html>
