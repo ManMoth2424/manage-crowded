@@ -1,0 +1,14 @@
+# .gitignore
+
+# 依存関係 (ライブラリ本体)
+node_modules/
+
+# データベースファイル
+bunkasai.db
+
+# 環境変数ファイル (★最重要：パスワード)
+.env
+
+# Mac/Windowsのシステムファイル
+.DS_Store
+Thumbs.db
